@@ -1,8 +1,26 @@
 #include <iostream>
 #include <string>
 
+using namespace std;
+
 void sort(std::string& a, std::string& b, std::string& c) {
-    // implement sort here
+    string placeholder;
+
+    if (a > b) {
+        placeholder = a;
+        a = b;
+        b = placeholder;
+    };
+    if (b > c) {
+        placeholder = b;
+        b = c;
+        c = placeholder;
+    };
+    if (a > c) {
+        placeholder = a;
+        a = c;
+        c = placeholder;
+    };
 }
 
 int main(int argc, char const* argv[]) {
