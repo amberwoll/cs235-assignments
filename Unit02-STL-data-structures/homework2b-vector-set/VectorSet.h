@@ -3,15 +3,22 @@
 template<class T>
 class VectorSet {
 public:
+
     bool contains(T item) const {
         // implement contains here
-
+        for (const T& thing : vector_set) {
+            if (thing === item) {
+                return true;
+            }
+        }
+        return false;
+    }
         // return true if item is in the set and false if not
     }
 
     bool insert(T item) {
         // implement insert here
-
+        if { contains(vector_set 
         // return true if item is inserted and false if item is already in the
         // set
     }
