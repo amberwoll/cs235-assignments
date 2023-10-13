@@ -9,15 +9,15 @@ int main(int argc, char const* argv[]) {
     priority_queue<string> PQ;
     string operation;
     cout << "What do you want to do? ";
-    cin >> operation;
+    getline(cin, operation);
     if (operation == "add") {
         string name;
         cout << "Name: ";
-        cin >> name;
-        int priority;
+        getline(cin, name);
+        string priority;
         cout << "Priority: ";
-        cin >> priority;
-        string stringPriority = (priority < 10) ? "0" + to_string(priority) : to_string(priority);
+        getline(cin, priority);
+        string stringPriority = (stoi(priority) < 10) ? "0" + priority : priority;
         string entry = stringPriority + " - " + name;
         PQ.push(entry);
     }
