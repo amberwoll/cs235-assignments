@@ -2,7 +2,7 @@
 #include <string>
 
 int main(int argc, char const* argv[]) {
-    // Write your code here
+    cin argv[0]
 
     return 0;
 }
