@@ -23,41 +23,55 @@ public:
     }
 
     const Node* get_head() const {
-        // implement get_head here
+        return head;
     }
 
     void push_back(T item) {
-        // implement push_back here
-        // step 1: create node
         Node* newNode = new Node(item);
-        // step 2: update tail next to point to the new node
-        if (tail != nullptr) {
-            tail->next = nullptr;
-        }
-        // step 3: change head and tail
-        tail = newNode;
         if (head == nullptr) {
             head = newNode;
+            tail = newNode;
+        } else {
+            tail->next = newNode;
+            tail = newNode;
         }
         count++;
     }
 
     void pop_back() {
-        // implement pop_back here
+        if (head == tail) {
+            delete head;
+            head = nullptr;
+            tail = nullptr;
+        } else {
+            Node* current = head;
+            while (current->next != tail) {
+                current = current->next;
+            }
+            delete tail;
+            tail = current;
+            tail->next = nullptr;
+        }
+        count--;
     }
 
     const T& front() const {
-        // implement front here
+        return head->value;
     }
 
     int size() const {
-        // implement size here
+        return count;
     }
 
     void clear() {
         // implement clear here
-        while (head != nullptr)
-            remove 0;
+        while (head != nullptr) {
+            Node* temp = head;
+            head = head->next;
+            delete temp;
+        }
+        tail = nullptr;
+        count = 0;
     }
 
     void remove(int position) {
