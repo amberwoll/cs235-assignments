@@ -4,23 +4,23 @@
 using namespace std;
 
 void sort(std::string& a, std::string& b, std::string& c) {
-    string placeholder;
+    std::string placeholder;
 
     if (a > b) {
         placeholder = a;
         a = b;
         b = placeholder;
-    };
-    if (b > c) {
-        placeholder = b;
-        b = c;
-        c = placeholder;
-    };
+    }
     if (a > c) {
         placeholder = a;
         a = c;
         c = placeholder;
-    };
+    }
+    if (b > c) {
+        placeholder = b;
+        b = c;
+        c = placeholder;
+    }
 }
 
 int main(int argc, char const* argv[]) {
