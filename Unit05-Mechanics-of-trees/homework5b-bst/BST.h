@@ -11,41 +11,99 @@ public:
         Node(T v) : left(nullptr), right(nullptr), value(v) {}
     };
 
-    BST() {
-        // implement the contructor here
+private:
+    Node* root = nullptr;
+    int treeSize = 0;
+
+    void clearNode(Node* node) {
+        if (node) {
+            clearNode(node->left);
+            clearNode(node->right);
+            delete node;
+        }
     }
 
+public:
+    BST() {}
+
     ~BST() {
-        // implement the destructor here
+        clear();
     }
 
     const Node* getRootNode() const {
-        // implement getRootNode here
-        // return a pointer to the tree's root node
+        return root;
     }
 
     bool insert(T item) {
-        // implement insert here
-        // return true if item was inserted, false if item was already in the tree
+        Node** current = &root;
+        while (*current) {
+            if (item < (*current)->value) {
+                current = &((*current)->left);
+            } else if (item > (*current)->value) {
+                current = &((*current)->right);
+            } else {
+                return false;
+            }
+        }
+        *current = new Node(item);
+        treeSize++;
+        return true;
     }
 
     bool remove(T item) {
-        // implement remove here
-        // return true if item was removed, false if item wasn't in the tree
+        Node** current = &root;
+        while (*current) {
+            if (item < (*current)->value) {
+                current = &((*current)->left);
+            } else if (item > (*current)->value) {
+                current = &((*current)->right);
+            } else {
+                Node* toDelete = *current;
+                if (!toDelete->left) {
+                    *current = toDelete->right;
+                } else if (!toDelete->right) {
+                    *current = toDelete->left;
+                } else {
+                    Node* branch = toDelete->right;
+                    Node** base = &(toDelete->right);
+                    while (branch->left) {
+                        base = &(branch->left);
+                        branch = branch->left;
+                    }
+
+                    toDelete->value = branch->value;
+                    toDelete = branch;
+                    *base = branch->right;
+                }
+                delete toDelete;
+                treeSize--;
+                return true;
+            }
+        }
+        return false;
     }
 
     bool contains(T item) const {
-        // implement contains here
-        // return true if item is in the tree, false otherwise
+        Node* current = root;
+        while (current) {
+            if (item < current->value) {
+                current = current->left;
+            } else if (item > current->value) {
+                current = current->right;
+            } else {
+                return true;
+            }
+        }
+        return false;
     }
 
     void clear() {
-        // implement clear here
-        // remove all nodes from the tree
+        clearNode(root);
+        root = nullptr;
+        treeSize = 0;
     }
 
     int size() const {
-        // implement size here
-        // return the number of nodes in the tree
+        return treeSize;
     }
 };

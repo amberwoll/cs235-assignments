@@ -2,36 +2,48 @@
 
 #include <iostream>
 #include <string>
+#include <algorithm>
 
 template<class T>
 class Vector {
 public:
-
     T* arr;
-    int currentSize = 0;
+    int currentSize;
+    int capacity;
 
-    Vector() {
-    }
+    Vector() : arr(nullptr), currentSize(0), capacity(0) {}
 
     ~Vector() {
         delete[] arr;
     }
 
+    void resizeIfNeeded() {
+        if (currentSize >= capacity) {
+            capacity = std::max(1, capacity * 2);
+            T* newArr = new T[capacity];
+            for (int i = 0; i < currentSize; ++i) {
+                newArr[i] = arr[i];
+            }
+            delete[] arr;
+            arr = newArr;
+        }
+    }
+
     void push_back(T item) {
+        resizeIfNeeded();
         arr[currentSize++] = item;
-        // implement push_back here
     }
 
     void insert(T item, int position) {
-        if (position < 0 || position >= currentSize) {
+        if (position < 0 || position > currentSize) {
             throw std::out_of_range("Index out of range");
         }
+        resizeIfNeeded();
         for (int i = currentSize; i > position; i--) {
             arr[i] = arr[i - 1];
         }
         arr[position] = item;
         currentSize++;
-        // implement insert here
     }
 
     void remove(int position) {
@@ -42,7 +54,6 @@ public:
             arr[i] = arr[i + 1];
         }
         currentSize--;
-        // implement remove here
     }
 
     T& operator[](int index) {
@@ -50,19 +61,16 @@ public:
             throw std::out_of_range("Index out of range");
         }
         return arr[index];
-        // implement operator[] here
     }
 
     int size() const {
         return currentSize;
-        // implement size here
     }
 
     void clear() {
-        while (currentSize > 0) {
-            remove(0);
-            currentSize--;
-        }
-        // implement clear here
+        currentSize = 0;
+        capacity = 0;
+        delete[] arr;
+        arr = nullptr;
     }
 };

@@ -24,7 +24,7 @@ void sort(std::string& a, std::string& b, std::string& c) {
 }
 
 int main(int argc, char const* argv[]) {
-    if (argc < 4) {
+    if (argc != 4) {
         std::cerr << "Usage: " << argv[0] << " a b c" << std::endl;
         return 1;
     }
