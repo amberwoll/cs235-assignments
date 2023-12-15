@@ -12,3 +12,5 @@ cout t-> vlaue endl
 // all 3 are depth first searched (any recuresive tree traversal is depth first like stacks)
 // queues are breadth first searches
 // breath first hits level by level, but depth first goes all the way down one side and works its way back up
+// big O n is the worst case, big Oh 1 is ideal, enough bins for big Oh 1
+// 
